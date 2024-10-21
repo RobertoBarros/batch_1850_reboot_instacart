@@ -1,23 +1,41 @@
 # Boas vindas
+fruits = {
+"banana" => 1.20,
+"kiwi" => 3.0,
+"manga" => 5.0,
+"abacaxi" => 10.01
+}
 puts "--------------------"
 puts " Welcome to Instacart"
 puts "--------------------"
 
 # Mostrar os produtos com o respectivo preço
-
+ fruits.each do |fruit, price|
+  puts "#{fruit} a R$ #{price}"
+ 
+end 
+cart = []
 # LOOP
-
+loop do
   # Perguntar qual produto ele quer comprar
-
-  # Verificar se o produto existe, ou dar uma mensagem de erro
-
+  puts "Escolha seu produto  "
+  product = gets.chomp 
   # o produto for `quit` sai do loop
-
-# FIM DO LOOP
-
+  break if product == "quit"
+  # Verificar se o produto existe, ou dar uma mensagem de erro
+  if fruits.key?(product)
+    cart << product 
+  else 
+    puts "Produto não disponivel, procure outro ou quit"
+  end
+end# FIM DO LOOP
 # Calcular o total dos produtos
-
+total = 0
+cart.each do |product|
+  price = fruits[product]
+  total += price
+end
 # Mostrar o total
 puts "--------------------"
-puts " Total R$ ????"
+puts " Total R$ #{total}"
 puts "--------------------"
