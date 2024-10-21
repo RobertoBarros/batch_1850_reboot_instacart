@@ -32,8 +32,9 @@ loop do
   # Verificar se o produto existe
   if fruits.key?(product)
     # Perguntar a quantidade
-
-    cart << {product: "abacaxi", quantity: 20} # Adiciona ao cart o produto
+    puts "Quantidade?"
+    quantity = gets.chomp.to_i
+    cart << {product: product, quantity: quantity} # Adiciona ao cart o produto
 
   else
     # Mensagem de erro que o produto não existe
@@ -41,12 +42,18 @@ loop do
   end
 end# FIM DO LOOP
 
+# [{:product=>"kiwi", :quantity=>3}, {:product=>"banana", :quantity=>2}, {:product=>"abacaxi", :quantity=>1}]
+
 # Calcular o total dos produtos
 total = 0
-cart.each do |product|
+cart.each do |info|
   # Calcular o subtotal por produto X quantidade
+  product = info[:product]
+  quantity = info[:quantity]
   price = fruits[product]
-  total += price
+  subtotal = price * quantity
+  puts "Product: #{product} #{quantity} x #{price} = #{subtotal.round(2)}"
+  total += subtotal
 end
 
 # Mostrar o total
