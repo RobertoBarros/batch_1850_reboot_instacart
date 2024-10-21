@@ -1,8 +1,8 @@
 fruits = {
-"banana" => 1.20,
-"kiwi" => 3.0,
-"manga" => 5.0,
-"abacaxi" => 10.01
+"banana" => {price: 1.2, availability: 5},
+"kiwi" => {price: 3.0, availability: 6},
+"manga" => {price: 5.0, availability: 2},
+"abacaxi" => {price: 10.01, availability: 8},
 }
 
 # Boas vindas
