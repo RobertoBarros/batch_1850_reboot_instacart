@@ -10,18 +10,16 @@ puts "--------------------"
 puts " Welcome to Instacart"
 puts "--------------------"
 
-# Mostrar os produtos com o respectivo preço
- fruits.each do |fruit, price|
-  puts "#{fruit} a R$ #{price}"
-
-end
-
 # cart é um array de hashs
 # onde cada hash é do tipo {product: "abacaxi", quantity: 20}
 cart = []
 
 # LOOP
 loop do
+  # Mostrar os produtos com o respectivo preço
+  fruits.each do |fruit, info|
+    puts "#{fruit} a R$ #{info[:price]} Disponível #{info[:availability]}"
+  end
   # Perguntar qual produto ele quer comprar
   puts "Escolha seu produto  "
   product = gets.chomp
@@ -34,8 +32,13 @@ loop do
     # Perguntar a quantidade
     puts "Quantidade?"
     quantity = gets.chomp.to_i
-    cart << {product: product, quantity: quantity} # Adiciona ao cart o produto
-
+    availability = fruits[product][:availability]
+    if quantity <= availability
+      cart << {product: product, quantity: quantity} # Adiciona ao cart o produto
+      fruits[product][:availability] -= quantity
+    else
+      puts "Estoque indisponível. Só temos #{availability} de #{product}"
+    end
   else
     # Mensagem de erro que o produto não existe
     puts "Produto não disponivel, procure outro ou quit"
@@ -50,7 +53,7 @@ cart.each do |info|
   # Calcular o subtotal por produto X quantidade
   product = info[:product]
   quantity = info[:quantity]
-  price = fruits[product]
+  price = fruits[product][:price]
   subtotal = price * quantity
   puts "Product: #{product} #{quantity} x #{price} = #{subtotal.round(2)}"
   total += subtotal
